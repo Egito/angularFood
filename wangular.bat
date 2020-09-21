@@ -1,0 +1,1 @@
+docker run --rm -it -p 8443:443 -p 80:4200 --privileged -e DISPLAY -v /dev/bus/usb:/dev/bus/usb -v /tmp/.X11-unix:/tmp/.X11-unix -v /usr/share/code/:/usr/share/code -v ${PWD}/:/root --workdir /root egito/angular /bin/sh

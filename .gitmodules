@@ -1,0 +1,3 @@
+[submodule "angularImob"]
+	path = angularImob
+	url = https://github.com/egito/gs

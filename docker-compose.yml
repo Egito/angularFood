@@ -1,0 +1,10 @@
+version: '2'
+services:
+  frontend:
+    container_name: imob-ft
+    image: node:alpine
+    volumes:
+      - ${PWD}/:/app
+    ports:
+      - 8082:4200
+    command: sh -c "apk add code* && cd /app && npm i && npm audit fix && ./node_modules/.bin/ng s --host=0.0.0.0"
