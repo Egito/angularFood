@@ -1,51 +1,16 @@
-version: '2'
+version: "2"
+
 services:
-  frontend:
-    container_name: imob-ft
-    image: egito/angular
-    volumes:
-      - ${PWD}/:/app
-      - /dev/bus/usb:/dev/bus/usb
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - /usr/share/code/:/usr/share/code
-      - ${PWD}/:/root
-    ports:
-      - 8443:443
-      - 80:4200
-
-  backend:
+  imob-bk:
     container_name: imob-bk
-    extends:
-      file: imob-bk-${TIPO}/common-services.yml
-      service: imob-bk
-    links:
-      - imob-db
-
-  imob-db:
-    container_name: imob-db
-    image: postgres
+    image: hasura/graphql-engine
     restart: always
-    environment:
-      POSTGRES_PASSWORD: "salvador!"
-    restart: always
-    volumes:
-      - /home/pg_data:/var/lib/postgresql/data
-      - ${PWD}/imob-bk-hasura/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-    #command: createdb -O postgres imob
-    #command: createdb blog1
-
-  pgadmin:
-    container_name: imob-pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "josedoegito@msn.com"
-      PGADMIN_DEFAULT_PASSWORD: "egito!"
     ports:
-      - "8081:80"
-    links:
-      - imob-db
-
+      - "4466:8080"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:salvador!@imob-db:5432/imob
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ENABLE_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
 
 #  prisma:
 #    container_name: imob-bk

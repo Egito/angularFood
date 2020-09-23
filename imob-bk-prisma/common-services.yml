@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  imob-bk:
+    container_name: imob-bk
+    image: prismagraphql/prisma:1.34
+    restart: always
+    ports:
+      - "4466:4466"
+    environment:
+      ENDPOINT: http://imob-bk:4466
+      PRISMA_MANAGEMENT_API_SECRET: salvador!
+      PRISMA_CONFIG: |
+        managementApiSecret: salvador!
+        port: 4466
+        databases:
+          default:
+            connector: postgres
+            migrations: true
+            host: imob-db
+            port: 5432
+            user: postgres
+            password: salvador!
+            rawAccess: true
+            connectionLimit: 10
