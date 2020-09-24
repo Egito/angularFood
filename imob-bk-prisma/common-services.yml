@@ -21,5 +21,7 @@ services:
             port: 5432
             user: postgres
             password: salvador!
+            schema: public
+            database: imob
             rawAccess: true
             connectionLimit: 10

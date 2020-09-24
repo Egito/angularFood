@@ -26,7 +26,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: "salvador!"
+      - POSTGRES_USER=salvador
+      - POSTGRES_PASSWORD=salvador!
     restart: always
     volumes:
       - /home/pg_data:/var/lib/postgresql/data

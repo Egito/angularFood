@@ -8,7 +8,7 @@ services:
     ports:
       - "4466:8080"
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:salvador!@imob-db:5432/imob
+      HASURA_GRAPHQL_DATABASE_URL: postgres://salvador:salvador!@imob-db:5432/imob
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ENABLE_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
 

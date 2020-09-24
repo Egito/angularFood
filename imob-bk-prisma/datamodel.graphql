@@ -1,12 +1,47 @@
-model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  role: Role! @default(value: USER)
+  chat: [Chat!]! @relation(name: "ChatsDoUsuario")
+  messages: [Message!]! @relation(name: "MensagensDoUsuario")
+  foto: File @relation(name: "FotoDoUsuario")
+  createdAt: DateTime @createdAt
+  updateAt: DateTime @updateAt
 }
 
 enum Role {
-  USER
   ADMIN
+  USER
+}
+
+type Chat {
+  id: ID! @id
+  title: String
+  isGroup: Boolean! @default(value: false)
+  users: [User!]! @relation(name: "UsusariosDoChat")
+  messages: [Message!]! @relation(name: "MensagensDoChat")
+  foto: File @relation(name: "FotoDoChat")
+  createdAt: DateTime @createdAt
+  updateAt: DateTime @updateAt
+}
+
+type Message {
+  id: ID! @id
+  text: String!
+  sender: User! @relation(name: "UsuarioDaMensagem")
+  chat: Chat! @relation(name: "ChatDaMensagem")
+  createdAt: DateTime @createdAt
+}
+
+type File {
+  id: ID! @id
+  secret: String!
+  name: String
+  size: Int
+  url: String
+  contentType: String
+  user: User @relation(name: "UsuarioDaFoto")
+  chat: Chat @relation(name: "ChatDaFoto")
+  createdAt: DateTime @createdAt
 }
