@@ -34,7 +34,7 @@ services:
     restart: always
     volumes:
       - /home/pg_data:/var/lib/postgresql/data
-      - ${PWD}/imob-bk-hasura/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ${PWD}/food-bk-hasura/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
   #pgadmin:
   #  container_name: pgadmin
