@@ -1,6 +1,7 @@
 type User {
   id: ID! @id
   name: String!
+  password: String! @default(value: "NoPassword")
   email: String! @unique
   role: Role! @default(value: USER)
   chat: [Chat!]! @relation(name: "ChatsDoUsuario")

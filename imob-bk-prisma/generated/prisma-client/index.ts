@@ -225,6 +225,8 @@ export type UserOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "password_ASC"
+  | "password_DESC"
   | "email_ASC"
   | "email_DESC"
   | "role_ASC"
@@ -305,6 +307,20 @@ export interface UserWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -579,6 +595,7 @@ export interface UserCreateManyWithoutChatInput {
 export interface UserCreateWithoutChatInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password?: Maybe<String>;
   email: String;
   role?: Maybe<Role>;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
@@ -636,6 +653,7 @@ export interface UserCreateOneWithoutFotoInput {
 export interface UserCreateWithoutFotoInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password?: Maybe<String>;
   email: String;
   role?: Maybe<Role>;
   chat?: Maybe<ChatCreateManyWithoutUsersInput>;
@@ -678,6 +696,7 @@ export interface UserCreateOneWithoutMessagesInput {
 export interface UserCreateWithoutMessagesInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password?: Maybe<String>;
   email: String;
   role?: Maybe<Role>;
   chat?: Maybe<ChatCreateManyWithoutUsersInput>;
@@ -750,6 +769,7 @@ export interface UserUpdateWithWhereUniqueWithoutChatInput {
 
 export interface UserUpdateWithoutChatDataInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
@@ -834,6 +854,7 @@ export interface UserUpdateOneWithoutFotoInput {
 
 export interface UserUpdateWithoutFotoDataInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   chat?: Maybe<ChatUpdateManyWithoutUsersInput>;
@@ -916,6 +937,7 @@ export interface UserUpdateOneRequiredWithoutMessagesInput {
 
 export interface UserUpdateWithoutMessagesDataInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   chat?: Maybe<ChatUpdateManyWithoutUsersInput>;
@@ -1155,6 +1177,20 @@ export interface UserScalarWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -1201,6 +1237,7 @@ export interface UserUpdateManyWithWhereNestedInput {
 
 export interface UserUpdateManyDataInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   updateAt?: Maybe<DateTimeInput>;
@@ -1261,6 +1298,7 @@ export interface MessageUpdateManyMutationInput {
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
+  password?: Maybe<String>;
   email: String;
   role?: Maybe<Role>;
   chat?: Maybe<ChatCreateManyWithoutUsersInput>;
@@ -1271,6 +1309,7 @@ export interface UserCreateInput {
 
 export interface UserUpdateInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   chat?: Maybe<ChatUpdateManyWithoutUsersInput>;
@@ -1281,6 +1320,7 @@ export interface UserUpdateInput {
 
 export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
+  password?: Maybe<String>;
   email?: Maybe<String>;
   role?: Maybe<Role>;
   updateAt?: Maybe<DateTimeInput>;
@@ -1430,6 +1470,7 @@ export interface ChatNullablePromise
 export interface User {
   id: ID_Output;
   name: String;
+  password: String;
   email: String;
   role: Role;
   createdAt?: DateTimeOutput;
@@ -1439,6 +1480,7 @@ export interface User {
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  password: () => Promise<String>;
   email: () => Promise<String>;
   role: () => Promise<Role>;
   chat: <T = FragmentableArray<Chat>>(args?: {
@@ -1469,6 +1511,7 @@ export interface UserSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   role: () => Promise<AsyncIterator<Role>>;
   chat: <T = Promise<AsyncIterator<ChatSubscription>>>(args?: {
@@ -1499,6 +1542,7 @@ export interface UserNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  password: () => Promise<String>;
   email: () => Promise<String>;
   role: () => Promise<Role>;
   chat: <T = FragmentableArray<Chat>>(args?: {
@@ -2050,6 +2094,7 @@ export interface UserSubscriptionPayloadSubscription
 export interface UserPreviousValues {
   id: ID_Output;
   name: String;
+  password: String;
   email: String;
   role: Role;
   createdAt?: DateTimeOutput;
@@ -2061,6 +2106,7 @@ export interface UserPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  password: () => Promise<String>;
   email: () => Promise<String>;
   role: () => Promise<Role>;
   createdAt: () => Promise<DateTimeOutput>;
@@ -2072,6 +2118,7 @@ export interface UserPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   role: () => Promise<AsyncIterator<Role>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;

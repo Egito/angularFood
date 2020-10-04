@@ -18,8 +18,9 @@ services:
     extends:
       file: imob-bk-${TIPO}/common-services.yml
       service: imob-bk
-    links:
+    depends_on:
       - imob-db
+      - imob-pgadmin
 
   imob-db:
     container_name: imob-db
@@ -35,7 +36,7 @@ services:
     #command: createdb -O postgres imob
     #command: createdb blog1
 
-  pgadmin:
+  imob-pgadmin:
     container_name: imob-pgadmin
     image: dpage/pgadmin4
     restart: always
@@ -44,51 +45,5 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "egito!"
     ports:
       - "8081:80"
-    links:
+    depends_on:
       - imob-db
-
-
-#  prisma:
-#    container_name: imob-bk
-#    image: prismagraphql/prisma:1.28
-#    restart: always
-#    links:
-#      - mysql
-#    ports:
-#      - "4466:4466"
-#    environment:
-#      ENDPOINT: http://imob-bk:4466
-#      PRISMA_MANAGEMENT_API_SECRET: salvador*egito
-#      PRISMA_CONFIG: |
-#        managementApiSecret: salvador*egito
-#        port: 4466
-#        databases:
-#          default:
-#            connector: mysql
-#            migrations: true
-#            host: imob-db
-#            port: 3306
-#            user: root
-#            password: graphcool
-#            rawAccess: true
-#
-#  mysql:
-#    image: mysql:5.7
-#    container_name: imob-db
-#    command: mysqld --max-connections=1000 --sql-mode="ANSI,ALLOW_INVALID_DATES,ANSI_QUOTES,ERROR_FOR_DIVISION_BY_ZERO,HIGH_NOT_PRECEDENCE,IGNORE_SPACE,NO_AUTO_CREATE_USER,NO_AUTO_VALUE_ON_ZERO,NO_BACKSLASH_ESCAPES,NO_ENGINE_SUBSTITUTION,NO_KEY_OPTIONS,NO_UNSIGNED_SUBTRACTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ONLY_FULL_GROUP_BY,PIPES_AS_CONCAT,REAL_AS_FLOAT,STRICT_ALL_TABLES,STRICT_TRANS_TABLES,TRADITIONAL"
-#    restart: always
-#    environment:
-#      MYSQL_ROOT_PASSWORD: graphcool
-#      MYSQL_USER: root
-#      MYSQL_DATABASE: prisma
-#      MYSQL_PASSWORD: graphcool
-#    volumes:
-#      - /home/my_data:/var/lib/mysql
-#    ports:
-#      - "3306:3306"
-#
-#
-#  rabbitmq:
-#    container_name: imob-rb
-#    image: rabbitmq:latest
-#

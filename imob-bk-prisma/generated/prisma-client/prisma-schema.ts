@@ -945,6 +945,7 @@ type Subscription {
 type User {
   id: ID!
   name: String!
+  password: String!
   email: String!
   role: Role!
   chat(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
@@ -963,6 +964,7 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   name: String!
+  password: String
   email: String!
   role: Role
   chat: ChatCreateManyWithoutUsersInput
@@ -989,6 +991,7 @@ input UserCreateOneWithoutMessagesInput {
 input UserCreateWithoutChatInput {
   id: ID
   name: String!
+  password: String
   email: String!
   role: Role
   messages: MessageCreateManyWithoutSenderInput
@@ -999,6 +1002,7 @@ input UserCreateWithoutChatInput {
 input UserCreateWithoutFotoInput {
   id: ID
   name: String!
+  password: String
   email: String!
   role: Role
   chat: ChatCreateManyWithoutUsersInput
@@ -1009,6 +1013,7 @@ input UserCreateWithoutFotoInput {
 input UserCreateWithoutMessagesInput {
   id: ID
   name: String!
+  password: String
   email: String!
   role: Role
   chat: ChatCreateManyWithoutUsersInput
@@ -1026,6 +1031,8 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  password_ASC
+  password_DESC
   email_ASC
   email_DESC
   role_ASC
@@ -1039,6 +1046,7 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   name: String!
+  password: String!
   email: String!
   role: Role!
   createdAt: DateTime
@@ -1074,6 +1082,20 @@ input UserScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -1133,6 +1155,7 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
+  password: String
   email: String
   role: Role
   chat: ChatUpdateManyWithoutUsersInput
@@ -1143,6 +1166,7 @@ input UserUpdateInput {
 
 input UserUpdateManyDataInput {
   name: String
+  password: String
   email: String
   role: Role
   updateAt: DateTime
@@ -1150,6 +1174,7 @@ input UserUpdateManyDataInput {
 
 input UserUpdateManyMutationInput {
   name: String
+  password: String
   email: String
   role: Role
   updateAt: DateTime
@@ -1190,6 +1215,7 @@ input UserUpdateOneWithoutFotoInput {
 
 input UserUpdateWithoutChatDataInput {
   name: String
+  password: String
   email: String
   role: Role
   messages: MessageUpdateManyWithoutSenderInput
@@ -1199,6 +1225,7 @@ input UserUpdateWithoutChatDataInput {
 
 input UserUpdateWithoutFotoDataInput {
   name: String
+  password: String
   email: String
   role: Role
   chat: ChatUpdateManyWithoutUsersInput
@@ -1208,6 +1235,7 @@ input UserUpdateWithoutFotoDataInput {
 
 input UserUpdateWithoutMessagesDataInput {
   name: String
+  password: String
   email: String
   role: Role
   chat: ChatUpdateManyWithoutUsersInput
@@ -1265,6 +1293,20 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
