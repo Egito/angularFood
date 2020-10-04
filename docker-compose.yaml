@@ -11,15 +11,17 @@ services:
       - SUDO_PASSWORD=password #optional
       - PROXY_DOMAIN=egito.net #optional
     volumes:
-      - ${PWD}/:/app
+      - ${PWD}/:/root
       - /dev/bus/usb:/dev/bus/usb
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /usr/share/code/:/usr/share/code
-      - ${PWD}/.config/code-server/:/config
+      - ${PWD}/.config/:/config
     ports:
       - 8443:443
       - 80:4200
     restart: unless-stopped
+    #user: egito
+    #command: ["bundle","exec","su","egito","/bin/ash"]
 
   db:
     container_name: db
